@@ -3,7 +3,6 @@ import ClientView from "./pages/clientView";
 import AdminView from "./pages/adminView";
 import "./index.css";
 
-
 function App() {
   return (
     <Router>
