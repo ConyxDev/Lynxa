@@ -3,7 +3,7 @@ import CalendarView from "../components/calendarView";
 
 function ClientView() {
   return (
-    <div>
+    <div className="p-8"> 
       <h1 className="text-2xl font-bold text-center mb-4">Réserver un Rendez-vous</h1>
       {/* Carte interactive */}
       <MapView />
