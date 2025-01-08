@@ -11,7 +11,8 @@ function ClientView() {
     <div className="boxes-container flex w-full justify-center gap-8">
     <div className="left-column flex flex-col w-[1108px] gap-8">
     <div className="map-container w-full h-[951px] flex-shrink-0 rounded-[45px] bg-white p-4">
-
+      <h1 className="text-lg font-semibold uppercase tracking-wider mt-[24px] mb-[32px] text-center">Planifiez vos rendez-vous en toute simplicité</h1>
+      <h2 className="text-sm font-normal tracking-wider mt-4 text-left mb-[32px]">Visualisez les disponibilités sur une carte interactive, choisissez votre créneau horaire, ou proposez une nouvelle localisation en fonction de vos besoins. </h2>
       <MapComponent />
     </div>
     <div className="calendar-container w-full h-[768px] flex-shrink-0 rounded-[45px] bg-white"></div>

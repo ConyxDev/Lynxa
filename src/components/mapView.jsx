@@ -1,23 +1,19 @@
 import { GoogleMap, LoadScript, Circle} from "@react-google-maps/api";
+import { useState } from "react";
 
-const containerStyle = {
-    width: "100%",
-    height: "100%",
-};
 
-const center = {
-    latitude: 46.2044,
-    longitude: 6.1432,
-};
+function MapComponent() {
+    const [defaultRadius, setDefaultRadius] = useState(5000);
+    const [center, setCenter] = useState({
+        lat: 46.2044,
+        lng: 6.1432,
+    });
 
-const defaultRadius = 5000;
-
-const MapComponent = () => {
     return (
         <div className="googleMap w-full h-[735px]">
             <LoadScript googleMapsApiKey="AIzaSyBrjSC_JYE7WmFbfaG5af0405yTM_mOqeY">
                 <GoogleMap
-                    mapContainerStyle={containerStyle}
+                    mapContainerStyle={{width: "100%", height: "100%"}}
                     center={center}
                     zoom={13}
                 >
