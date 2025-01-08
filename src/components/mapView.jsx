@@ -1,27 +1,43 @@
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import { GoogleMap, LoadScript, Circle} from "@react-google-maps/api";
 
 const containerStyle = {
-  width: "100%",
-  height: "800px",
+    width: "100%",
+    height: "100%",
 };
 
 const center = {
-  lat: 46.2,
-  lng: 6.1,
+    latitude: 46.2044,
+    longitude: 6.1432,
 };
 
-function MapView() {
-    return (
-        <LoadScript googleMapsApiKey="AIzaSyBrjSC_JYE7WmFbfaG5af0405yTM_mOqeY">
-            <GoogleMap
-                mapContainerStyle={containerStyle}
-                center={center}
-                zoom={12}
-            >
-                <Marker position={center} />
-            </GoogleMap>
-        </LoadScript>
-    )
-}
+const defaultRadius = 5000;
 
-export default MapView;
+const MapComponent = () => {
+    return (
+        <div className="googleMap w-full h-[735px]">
+            <LoadScript googleMapsApiKey="AIzaSyBrjSC_JYE7WmFbfaG5af0405yTM_mOqeY">
+                <GoogleMap
+                    mapContainerStyle={containerStyle}
+                    center={center}
+                    zoom={13}
+                >
+                    <Circle
+                    center={center} 
+                    radius={defaultRadius}
+                    options={{
+                        strokeColor: "#000000",
+                        strokeOpacity: 0.8,
+                        strokeWeight: 2,
+                        fillColor: "#007BFF",
+                        fillOpacity: 0.2,
+                    }}
+                    />
+                </GoogleMap>
+            </LoadScript>
+        </div>
+    );
+};
+
+export default MapComponent;
+
+
