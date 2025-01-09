@@ -1,5 +1,5 @@
 
-function AdminView() {
+const AdminView = () => {
   return (
     <div>
       <h1>Tableau de Bord Admin</h1>
