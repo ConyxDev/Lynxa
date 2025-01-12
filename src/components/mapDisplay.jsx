@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { GoogleMap } from "@react-google-maps/api";
-import PostalZones from "../components/postalZones";
+import PostalZones from "./postalZones";
+import FetchWMSData from "./fetchData";
 
 const MapDisplay = () => {
     const mapRef = useRef(null);
@@ -15,15 +16,20 @@ const MapDisplay = () => {
         lng: 6.1432, // Longitude de Genève
     };
 
+    const onLoad = (map) => {
+        mapRef.current = map;
+    };
+
     return (
         <div style={{ width: "100%", height: "100%" }}>
                 <GoogleMap
                     mapContainerStyle={mapContainerStyle}
                     center={defaultCenter}
                     zoom={11}
-                    onLoad={(map) => (mapRef.current = map)}
+                    onLoad={onLoad}
                 >
                 <PostalZones map={mapRef.current}/>
+                <FetchWMSData/>
                 </GoogleMap>     
         </div>
     );
