@@ -1,7 +1,8 @@
 import { useRef } from "react";
 import { GoogleMap } from "@react-google-maps/api";
-import PostalZones from "./postalZones";
-import FetchWMSData from "./fetchData";
+/* import PostalZones from "./postalZones";
+import GenevaPostalCodes from "./fetchData"; */
+import Geneva1201 from "./geneva1201";
 
 const MapDisplay = () => {
     const mapRef = useRef(null);
@@ -9,6 +10,14 @@ const MapDisplay = () => {
     const mapContainerStyle = {
         width: "100%",
         height: "680px",
+    };
+
+    const mapOptions = {
+        mapTypeId: 'terrain',
+        mapTypeControl: true,
+        streetViewControl: true,
+        fullscreenControl: true,
+        zoomControl: true,
     };
 
     const defaultCenter = {
@@ -27,9 +36,11 @@ const MapDisplay = () => {
                     center={defaultCenter}
                     zoom={11}
                     onLoad={onLoad}
+                    options={mapOptions}
                 >
-                <PostalZones map={mapRef.current}/>
-                <FetchWMSData/>
+{/*                 <PostalZones map={mapRef.current}/>
+                <GenevaPostalCodes/> */}
+                <Geneva1201/>
                 </GoogleMap>     
         </div>
     );

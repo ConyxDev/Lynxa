@@ -20,11 +20,13 @@
     "axios": "^1.7.9",
     "leaflet": "^1.9.4",
     "papaparse": "^5.5.1",
+    "proj4": "^2.15.0",
     "prop-types": "^15.8.1",
     "react": "^19.0.0-rc.1",
     "react-dom": "^19.0.0-rc.1",
     "react-leaflet": "^5.0.0",
-    "react-router-dom": "^7.1.0"
+    "react-router-dom": "^7.1.0",
+    "shapefile": "^0.6.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

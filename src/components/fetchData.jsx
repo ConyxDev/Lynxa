@@ -1,36 +1,51 @@
-import { useEffect } from 'react';
-import axios from 'axios';
+import { useEffect, useState } from 'react';
 
-const WMS_URL = "https://wms.geo.admin.ch/?SERVICE=WMS&VERSION=1.3.0";
+const GenevaPostalCodes = () => {
+    useEffect(() => {
+        const loadData = async () => {
+            try {
+                // Import du fichier JSON des codes postaux
+                const zipData = await import('../asset/AMTOVZ_ZIP.json');
 
-const FetchWMSData = () => {
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(WMS_URL, {
-          params: {
-            REQUEST: "GetFeatureInfo",
-            LAYERS: "ch.swisstopo-vd.ortschaftenverzeichnis_plz",
-            QUERY_LAYERS: "ch.swisstopo-vd.ortschaftenverzeichnis_plz",
-            BBOX: "2485000,1070000,2500000,1110000", // Coordonnées pour le canton de Genève
-            CRS: "EPSG:2056",
-            WIDTH: 1024,
-            HEIGHT: 768,
-            I: 512, // Point à interroger sur l'axe X
-            J: 384, // Point à interroger sur l'axe Y
-            INFO_FORMAT: "application/json" // Format de la réponse
-          }
-        });
-        console.log("Données récupérées :", response.data);
-      } catch (error) {
-        console.error("Erreur lors de la récupération des données :", error);
-      }
-    };
+                // Filtrer et trier les codes postaux
+                const filteredZones = zipData.default.features
+                    .filter(feature => {
+                        const zip = feature.properties.ZIP4;
+                        return zip >= "1200" && zip <= "1248";
+                    })
+                    .map(feature => ({
+                        postalCode: feature.properties.ZIP4,
+                        name: feature.properties.NAME,
+                        geometry: feature.geometry
+                    }))
+                    .sort((a, b) => a.postalCode.localeCompare(b.postalCode));
 
-    fetchData();
-  }, []);
+                console.log('Codes postaux trouvés :', filteredZones);
+                console.log('Nombre total de zones :', filteredZones.length);
 
-  return <div>Vérifiez la console pour voir les données récupérées.</div>;
+                // Log détaillé des zones
+                filteredZones.forEach(zone => {
+                    console.log(`
+Code postal: ${zone.postalCode}
+Nom: ${zone.name}
+Nombre de points de coordonnées: ${zone.geometry.coordinates[0].length}
+-------------------`);
+                });
+
+            } catch (error) {
+                console.error('Erreur lors du chargement des données:', error);
+            }
+        };
+
+        loadData();
+    }, []);
+
+    return (
+        <div>
+            <h2>Codes postaux de Genève (1200-1248)</h2>
+            <p>Veuillez consulter la console pour voir les détails des zones</p>
+        </div>
+    );
 };
 
-export default FetchWMSData;
+export default GenevaPostalCodes;
