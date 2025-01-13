@@ -1,0 +1,60 @@
+{
+    "appointments": {
+      "appointment1": {
+        "date": "2024-01-15",
+        "location": "Collonge-Bellerive",
+        "postalCode": "1245",
+        "clientInfo": {
+          "name": "Jean Martin",
+          "email": "jean.martin@email.com",
+          "phone": "+41 76 123 45 67"
+        },
+        "timeSlot": "09h00 - 10h00",
+        "status": "confirmed",
+        "createdAt": "2024-01-10T14:30:00",
+        "updatedAt": "2024-01-10T15:00:00"
+      },
+      "appointment2": {
+        "date": "2024-01-15",
+        "location": "Veyrier",
+        "postalCode": "1255",
+        "clientInfo": {
+          "name": "Marie Dubois",
+          "email": "marie.dubois@email.com",
+          "phone": "+41 78 234 56 78"
+        },
+        "timeSlot": "10h15 - 11h15",
+        "status": "confirmed",
+        "createdAt": "2024-01-11T09:15:00",
+        "updatedAt": "2024-01-11T10:00:00"
+      },
+      "appointment3": {
+        "date": "2024-01-15",
+        "location": "Le Grand-Saconnex",
+        "postalCode": "1218",
+        "clientInfo": {
+          "name": "Pierre Blanc",
+          "email": "pierre.blanc@email.com",
+          "phone": "+41 79 345 67 89"
+        },
+        "timeSlot": "14h15 - 15h15",
+        "status": "confirmed",
+        "createdAt": "2024-01-12T11:20:00",
+        "updatedAt": "2024-01-12T11:45:00"
+      },
+      "appointment4": {
+        "date": "2024-01-15",
+        "location": "Veyrier",
+        "postalCode": "1255",
+        "clientInfo": {
+          "name": "Sophie Lambert",
+          "email": "sophie.lambert@email.com",
+          "phone": "+41 77 456 78 90"
+        },
+        "timeSlot": "15h45 - 16h45",
+        "status": "confirmed",
+        "createdAt": "2024-01-12T16:00:00",
+        "updatedAt": "2024-01-12T16:30:00"
+      }
+    }
+  }

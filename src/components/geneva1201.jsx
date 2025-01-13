@@ -10,9 +10,9 @@ const Geneva1201 = () => {
     const WGS84 = "+proj=longlat +datum=WGS84 +no_defs";
 
     const polygonOptions = {
-        fillColor: "#FF0000",
+        fillColor: "#0099cc",
         fillOpacity: 0.35,
-        strokeColor: "#FF0000",
+        strokeColor: "#0099cc",
         strokeOpacity: 1,
         strokeWeight: 2
     };

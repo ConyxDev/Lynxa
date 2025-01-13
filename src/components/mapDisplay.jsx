@@ -1,8 +1,7 @@
 import { useRef } from "react";
 import { GoogleMap } from "@react-google-maps/api";
-/* import PostalZones from "./postalZones";
-import GenevaPostalCodes from "./fetchData"; */
-import Geneva1201 from "./geneva1201";
+/* import Geneva1201 from "./geneva1201"; */
+import ConfirmedAppointmentsZones from "./genevaMain";
 
 const MapDisplay = () => {
     const mapRef = useRef(null);
@@ -38,9 +37,8 @@ const MapDisplay = () => {
                     onLoad={onLoad}
                     options={mapOptions}
                 >
-{/*                 <PostalZones map={mapRef.current}/>
-                <GenevaPostalCodes/> */}
-                <Geneva1201/>
+                {/* <Geneva1201/> */}
+                <ConfirmedAppointmentsZones/>
                 </GoogleMap>     
         </div>
     );

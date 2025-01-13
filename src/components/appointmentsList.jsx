@@ -1,49 +1,55 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
-const AppointmentsList = () => {
-    const [appointments] = useState([
-        {
-            locations: [
-                "Collonge-Bellerive",
-                "Veyrier",
-                "Le Grand-Saconnex"
-            ]
-        },
-        {
-            times: [
-                "09h00 - 10h00",
-                "10h15 - 11h15",
-                "13h00 - 14h00",
-                "14h15 - 15h15",
-                "15h45 - 16h45",
-                "17h00 - 18h00"
-            ]
+const AppointmentsMap = () => {
+  const [appointments, setAppointments] = useState([]); // Stocker les rendez-vous
+
+  useEffect(() => {
+    const fetchAppointments = async () => {
+      try {
+        // URL Firebase de votre base de données
+        const url =
+          'https://saasadomicile-default-rtdb.europe-west1.firebasedatabase.app/appointments.json';
+
+        // Appel à Firebase pour récupérer les données
+        const response = await axios.get(url);
+
+        // Vérification et stockage des données
+        if (response.data) {
+          const appointmentsData = Object.values(response.data); // Convertir en tableau
+          setAppointments(appointmentsData);
+          console.log('Appointments:', appointmentsData); // Afficher les données dans la console
+        } else {
+          console.log('No appointments found');
         }
-    ]);
+      } catch (error) {
+        console.error('Error fetching appointments:', error);
+      }
+    };
 
-    const [date] = useState(new Date());
-    
-    return (
-        <div>
-        <div>
-            <h1>{date.toLocaleDateString()}</h1>
-        </div>
-        <div>
-            <h2>Réservez votre rendez-vous</h2>
-            <h3>Sélectionnez un créneau horaire parmi les options disponibles ci-dessous.</h3>
-        </div>
-        <div>
-            {appointments.map((appointment) => (
-                <ul key={appointment.id}>
-                    <li>{appointment.locations}</li>
-                    <li>{appointment.times}</li>
-                </ul>
-            ))}
-        </div>
-        </div>
-    )
+    fetchAppointments();
+  }, []);
 
+  return (
+    <div>
+      <h1>Appointments Map</h1>
+      {appointments.length > 0 ? (
+        <ul>
+          {appointments.map((appointment, index) => (
+            <li key={index}>
+              <strong>Date:</strong> {appointment.date} <br />
+              <strong>Time Slot:</strong> {appointment.timeSlot} <br />
+              <strong>Location:</strong> {appointment.location} <br />
+              <strong>Postal Code:</strong> {appointment.postalCode} <br />
+              <strong>Status:</strong> {appointment.status}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>Loading appointments...</p>
+      )}
+    </div>
+  );
+};
 
-}
-
-export default AppointmentsList;
+export default AppointmentsMap;

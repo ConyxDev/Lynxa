@@ -1,6 +1,6 @@
 import Lynxa from "../images/Lynxa.svg";
 /* import MapComponent from "../components/mapView"; */
-import AppointmentsList from "../components/appointmentsList";
+import AppointmentsMap from "../components/appointmentsList";
 import MapDisplay from "../components/mapDisplay";
 
 
@@ -22,7 +22,7 @@ const ClientView = () => {
     </div>
     <div className="right-column flex flex-col w-[695px] gap-8">
     <div className="slot-container w-full h-[736px] flex-shrink-0 rounded-[45px] bg-white">
-      {/* <AppointmentsList /> */}
+      <AppointmentsMap />
     </div>
     <div className="smallCalendar-container w-full h-[986px] flex-shrink-0 rounded-[45px] bg-white"></div>
     </div>
