@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import proj4 from 'proj4';
-import { Polygon } from '@react-google-maps/api';
+import { Polygon, Marker } from '@react-google-maps/api';
 import axios from 'axios';
+import markerGoogle from '../icones/markerGoogle.svg';
+import { calculateCentroid } from '../components/geometryUtils';
 
 const ConfirmedAppointmentsZones = () => {
     const [zones, setZones] = useState([]); // Stocker les zones confirmées à afficher
@@ -60,9 +62,13 @@ const ConfirmedAppointmentsZones = () => {
                         const [lng, lat] = proj4(MN95, WGS84, [coord[0], coord[1]]);
                         return { lat, lng };
                     });
+
+                    const center = calculateCentroid(coordinates);
+
                     return {
                         postalCode: zone.properties.ZIP4,
                         coordinates,
+                        center,
                     };
                 });
 
@@ -82,12 +88,19 @@ const ConfirmedAppointmentsZones = () => {
     return (
         <>
             {zones.map((zone, index) => (
+                <>
                 <Polygon
                     key={index}
                     paths={zone.coordinates}
                     options={polygonOptions}
                     onClick={() => console.log(`Zone ${zone.postalCode} clicked`)}
                 />
+                <Marker
+                    position={zone.center}
+                    icon={markerGoogle}
+                    onClick={() => console.log(`Zone ${zone.postalCode} clicked`)}
+                />
+                </>
             ))}
         </>
     );
