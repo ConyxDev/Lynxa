@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ClientView from "./pages/clientView";
 import AdminView from "./pages/adminView";
 import { LoadScript } from "@react-google-maps/api";
+/* import Login from "./pages/login"; */
 import "./index.css";
 import "./App.css";
 
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<ClientView />} />
 
           {/* Route pour la partie admin commerçant */}
+         {/*  <Route path="/login" element={<Login />} /> */}
           <Route path="/admin" element={<AdminView />} />
         </Routes>
       </LoadScript>
