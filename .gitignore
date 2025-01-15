@@ -18,6 +18,7 @@ build/
 # Environment variables
 .env
 .env.*.local
+firebase-config.js
 
 # Vite cache
 .vite/
@@ -29,6 +30,7 @@ build/
 .idea/
 .DS_Store
 *.sw?
+
 
 # Test outputs
 coverage/

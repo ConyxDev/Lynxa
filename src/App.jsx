@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Routes, Route } from "react-router-dom";
 import ClientView from "./features/clientView";
 import AdminView from "./features/adminView";
 import { LoadScript } from "@react-google-maps/api";
