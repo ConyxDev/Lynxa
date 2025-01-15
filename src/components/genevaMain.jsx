@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import proj4 from 'proj4';
 import { Polygon, Marker } from '@react-google-maps/api';
 import axios from 'axios';
-import markerGoogle from '../icones/markerGoogle.svg';
+import markerGoogle from '../assets/icon/markerGoogle.svg';
 import { calculateCentroid } from '../components/geometryUtils';
 
 const ConfirmedAppointmentsZones = () => {
