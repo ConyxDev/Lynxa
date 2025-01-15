@@ -8,6 +8,7 @@ import Line2 from "../assets/icon/Line2.svg";
 import emailIcon from "../assets/icon/emailIcon.svg";
 import lock from "../assets/icon/lock.svg";
 import googleIcon from "../assets/icon/googleIcon.svg";
+import Lynxa from "../images/Lynxa.svg";
 /* header and footer to import  */
 
 const LoginPage = () => {
@@ -22,7 +23,7 @@ const LoginPage = () => {
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             console.log(userCredential);
-            navigate("/adminView");
+            navigate("/admin");
         } catch (error) {
             setError(error.message);
         }
@@ -33,7 +34,7 @@ const LoginPage = () => {
       try {
           const result = await signInWithPopup(auth, provider);
           console.log("Google login result:", result.user);
-          navigate("/adminView");
+          navigate("/admin");
       } catch (error) {
           console.error("Google login error: ", error.message);
           setError("Google login failed.");
@@ -42,12 +43,14 @@ const LoginPage = () => {
 
     return (
     
+    <div className="main-container w-{1920px} min-h-screen flex-shrink-0 px-6 bg-mainbackground ">
     <div className="login-container h-screen flex flex-wrap lg bg-customBlue rounded-[10px] " id="login-page">
-    {/* Conteneur principal centré */}
-
-    <div className="header-section w-full flex justify-between items-center  ">
-      <div className="logo-section flex w-[297px] ml-[178px] mt-[48px] text-customBlue2 text-[48px] font-mona font-medium">LogiSmart</div>
-      <div className="version-section flex w-[297px] mr-5 mt-12 text-black text-[24px] font-mona">version 2.4</div>
+    <div className="header flex w-full gap-2 p-6 mr-12 ml-12 justify-between items-center">
+      <div className="flex items-center gap-2">
+      <img src={Lynxa} alt="Lynxa" className="w-[100px] h-[100px]"/>
+      <h1 className="text-3xl font-semibold uppercase tracking-wider">Lynxa</h1>
+      </div>
+      <div className="flex justify-end version-section w-[297px] mr-5 mt-12 text-black text-[24px] font-mona">version 2.4</div>
     </div>
     
     <div className="login-section  w-[654px] h-[720px] mt-[77px] bg-white rounded-[30px] drop-shadow-lg flex items-center flex-col m-auto">
@@ -99,6 +102,7 @@ const LoginPage = () => {
     </button>
 
   </div>
+</div>
 </div>
     )
 }
