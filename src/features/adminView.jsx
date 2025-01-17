@@ -2,7 +2,8 @@ import { auth } from "../firebase-config";
 import { useNavigate } from "react-router-dom";
 import AppointmentsMap from "../components/appointmentsList";
 import MapDisplay from "../components/mapDisplay";
-import AppointmentsClientBooking from "../components/appointmentsClientBooking";
+import AdminBooking from "../components/appointmentsClientBooking";
+
 const AdminView = () => {
   const navigate = useNavigate();
 
@@ -20,7 +21,7 @@ const AdminView = () => {
         <p>Liste des rendez-vous confirmés...</p>
         <AppointmentsMap />
         <MapDisplay />
-        <AppointmentsClientBooking />
+        <AdminBooking />
       </div>
     </div>
   );
