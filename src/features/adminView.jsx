@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import AppointmentsMap from "../components/appointmentsList";
 import MapDisplay from "../components/mapDisplay";
 import AdminBooking from "../components/appointmentsClientBooking";
+import AdminBookingFirestore from "../components/adminBookingFirestore";
 
 const AdminView = () => {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ const AdminView = () => {
         <AppointmentsMap />
         <MapDisplay />
         <AdminBooking />
+        <AdminBookingFirestore />
       </div>
     </div>
   );

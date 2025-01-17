@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { auth } from '../firebase-config'; // Importez l'authentification Firebase
+import { auth, database } from '../firebase-config'; // Importez votre configuration Firebase
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { ref, push } from 'firebase/database';
+
 
 const AdminBooking = () => {
-  const [user] = useAuthState(auth); // Vérifie si l'utilisateur est connecté
+  const [user] = useAuthState(auth); // Vérifie si un utilisateur est connecté
   const [bookingData, setBookingData] = useState({
     userId: '',
     date: '',
@@ -62,17 +63,14 @@ const AdminBooking = () => {
     }
 
     try {
-      const url =
-        'https://saasadomicile-default-rtdb.europe-west1.firebasedatabase.app/adminBookings.json';
-
-      // Envoi des données à Firebase
-      const response = await axios.post(url, {
-        ...bookingData,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      });
-
-      console.log('Booking added:', response.data);
+      // Ajout de la réservation dans la collection "adminBookings"
+    const bookingRef = ref(database, 'adminBookings');
+    const newBookingRef = await push(bookingRef, {
+        ...bookingData, 
+        createdAt: new Date().toISOString(), 
+        updatedAt: new Date().toISOString()
+    });
+    console.log('Booking added with key:', newBookingRef.key); // Affiche la clé unique générée
       setSuccessMessage('Réservation ajoutée avec succès.');
       setBookingData({
         userId: user.uid,
@@ -178,4 +176,3 @@ const AdminBooking = () => {
 };
 
 export default AdminBooking;
-
