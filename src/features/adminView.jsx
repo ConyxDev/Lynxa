@@ -4,6 +4,7 @@ import AppointmentsMap from "../components/appointmentsList";
 import MapDisplay from "../components/mapDisplay";
 import AdminBooking from "../components/appointmentsClientBooking";
 import AdminBookingFirestore from "../components/adminBookingFirestore";
+import BookingToConfirm from "../components/bookingToConfirm";
 
 const AdminView = () => {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ const AdminView = () => {
         <MapDisplay />
         <AdminBooking />
         <AdminBookingFirestore />
+        <BookingToConfirm />
       </div>
     </div>
   );

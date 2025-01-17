@@ -10,8 +10,10 @@ const AdminBooking = () => {
     userId: '',
     date: '',
     time: '',
-    clientName: '',
-    clientEmail: '',
+    LastName: '',
+    FirstName: '',
+    Email: '',
+    Phone: '',  
     service: '',
     location: {
       address: '',
@@ -76,8 +78,10 @@ const AdminBooking = () => {
         userId: user.uid,
         date: '',
         time: '',
-        clientName: '',
-        clientEmail: '',
+        LastName: '',
+        FirstName: '',
+        Email: '',
+        Phone: '',
         service: '',
         location: {
           address: '',
@@ -118,20 +122,36 @@ const AdminBooking = () => {
           />
           <input
             type="text"
-            name="clientName"
-            value={bookingData.clientName}
+            name="LastName"
+            value={bookingData.LastName}
             onChange={handleInputChange}
             placeholder="Nom du client"
             required
           />
           <input
+            type="text"
+            name="FirstName"
+            value={bookingData.FirstName}
+            onChange={handleInputChange}
+            placeholder="Prénom du client"
+            required
+          />
+          <input
             type="email"
-            name="clientEmail"
-            value={bookingData.clientEmail}
+            name="Email"
+            value={bookingData.Email}
             onChange={handleInputChange}
             placeholder="Email du client"
             required
           />
+          <input
+            type="tel"
+            name="Phone"
+            value={bookingData.Phone}
+            onChange={handleInputChange}
+            placeholder="Téléphone du client"
+            required
+          />  
           <input
             type="text"
             name="service"
