@@ -14,11 +14,15 @@ const BookingToConfirm = () => {
         if (snapshot.exists()) {
           const bookings = snapshot.val();
           // Convertir en tableau avec la clé incluse
-          const bookingsArray = Object.keys(bookings).map((key) => ({
-            id: key, // Ajouter la clé Firebase comme ID
+          const filteredBookings = Object.keys(bookings)
+          .filter(key => bookings[key] && typeof bookings[key] === 'object') // Filtrer les objets valides
+          .map((key) => ({
+            id: key,
             ...bookings[key],
-          }));
-          setBookingsArray(bookingsArray);
+          }))
+          .filter((booking) => booking && booking.confirmed !== true);  // Filtrer les réservations non confirmées
+  
+        setBookingsArray(filteredBookings);
         } else {
           console.log("Aucune réservation trouvée.");
         }
@@ -37,10 +41,7 @@ const BookingToConfirm = () => {
       console.log(`Réservation ${id} confirmée.`);
       // Met à jour localement l'état pour refléter la confirmation
       setBookingsArray((prev) =>
-        prev.map((booking) =>
-          booking.id === id ? { ...booking, confirmed: true } : booking
-        )
-      );
+        	prev.filter((booking) => booking.id !==id));
     } catch (error) {
       console.error("Erreur lors de la confirmation de la réservation :", error);
     }
@@ -52,30 +53,29 @@ const BookingToConfirm = () => {
       <ul className="flex flex-wrap gap-2">
         {bookingsArray.length > 0 ? (
           bookingsArray.map((booking) => (
-            <li
-              className="w-[30%] border-2 border-black rounded-md p-2 m-2"
-              key={booking.id}
-            >
-              <strong>Nom :</strong> {booking.clientName || "Non spécifié"}<br />
-              <strong>Prénom :</strong> {booking.clientFirstName || "Non spécifié"}<br />
-              <strong>Nom :</strong> {booking.LastName}<br />
-              <strong>Email :</strong> {booking.Email}<br />
-              <strong>Adresse :</strong> {booking.location?.address || "Non spécifiée"}<br />
-              <strong>Ville :</strong> {booking.location?.city || "Non spécifiée"}<br />
-              <strong>Code postal :</strong> {booking.location?.postalCode || "Non spécifié"}<br />
-              <strong>Pays :</strong> {booking.location?.country || "Non spécifié"}<br />
-              <strong>Statut :</strong>{" "}
-              {booking.confirmed ? "Confirmée" : "En attente de confirmation"}
-              <br />
-              {!booking.confirmed && (
-                <button
-                  className="bg-blue-500 p-2 rounded-md mt-2"
-                  onClick={() => handleConfirm(booking.id)}
-                >
-                  Confirmer
-                </button>
-              )}
-            </li>
+          <li key={booking.id}>
+            <strong>Date :</strong> {booking?.date ?? "Non spécifiée"}<br />
+            <strong>Heure :</strong> {booking?.time ?? "Non spécifiée"}<br />
+            <strong>Nom :</strong> {booking?.LastName ?? "Non spécifié"}<br />
+            <strong>Prénom :</strong> {booking?.FirstName ?? "Non spécifié"}<br />
+            <strong>Email :</strong> {booking?.Email ?? "Non spécifié"}<br />
+            <strong>Téléphone :</strong> {booking?.Phone ?? "Non spécifié"}<br />
+            <strong>Service :</strong> {booking?.service ?? "Non spécifié"}<br />
+            <strong>Adresse :</strong> {booking?.location?.address ?? "Non spécifiée"}<br />
+            <strong>Ville :</strong> {booking?.location?.city ?? "Non spécifiée"}<br />
+            <strong>Code postal :</strong> {booking?.location?.postalCode ?? "Non spécifié"}<br />
+            <strong>Pays :</strong> {booking?.location?.country ?? "Non spécifié"}<br />
+            <strong>Statut :</strong> {booking?.confirmed ? "Confirmée" : "En attente de confirmation"}
+            <br />
+            {!booking?.confirmed && (
+              <button
+                className="bg-blue-500 p-2 rounded-md mt-2"
+                onClick={() => handleConfirm(booking.id)}
+              >
+                Confirmer
+              </button>
+            )}
+          </li>
           ))
         ) : (
           <p>Aucune réservation à afficher.</p>

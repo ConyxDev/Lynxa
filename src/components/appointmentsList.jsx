@@ -1,24 +1,26 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { database } from "../firebase-config";
+import { ref, get, update } from "firebase/database"
 
 const AppointmentsMap = () => {
-  const [appointments, setAppointments] = useState([]); // Stocker les rendez-vous
+  const [appointmentsArray, setAppointmentsArray] = useState([]); // Stocker les rendez-vous
 
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
         // URL Firebase de votre base de données
-        const url =
-          'https://saasadomicile-default-rtdb.europe-west1.firebasedatabase.app/appointments.json';
-
-        // Appel à Firebase pour récupérer les données
-        const response = await axios.get(url);
+        const bookingRef = ref(database, "adminBookings");
+        const snapshot = await get(bookingRef);
 
         // Vérification et stockage des données
-        if (response.data) {
-          const appointmentsData = Object.values(response.data); // Convertir en tableau
-          setAppointments(appointmentsData);
-          console.log('Appointments:', appointmentsData); // Afficher les données dans la console
+        if (snapshot.exists()) {
+          const appointmentsData = snapshot.val();
+          const appointmentsArray = Object.keys(appointmentsData).map((key) => ({
+            id: key, // Ajouter la clé Firebase comme ID
+            ...appointmentsData[key],
+          }));
+          setAppointmentsArray(appointmentsArray);
+          console.log('Appointments:', appointmentsArray); // Afficher les données dans la console
         } else {
           console.log('No appointments found');
         }
@@ -33,15 +35,21 @@ const AppointmentsMap = () => {
   return (
     <div>
       <h1>Appointments Map</h1>
-      {appointments.length > 0 ? (
+      {appointmentsArray.length > 0 ? (
         <ul>
-          {appointments.map((appointment, index) => (
+            {appointmentsArray.map((booking, index) => (
             <li key={index}>
-              <strong>Date:</strong> {appointment.date} <br />
-              <strong>Time Slot:</strong> {appointment.timeSlot} <br />
-              <strong>Location:</strong> {appointment.location} <br />
-              <strong>Postal Code:</strong> {appointment.postalCode} <br />
-              <strong>Status:</strong> {appointment.status}
+            <strong>Date :</strong> {booking?.date ?? "Non spécifiée"}<br />
+            <strong>Heure :</strong> {booking?.time ?? "Non spécifiée"}<br />
+            <strong>Nom :</strong> {booking?.LastName ?? "Non spécifié"}<br />
+            <strong>Prénom :</strong> {booking?.FirstName ?? "Non spécifié"}<br />
+            <strong>Email :</strong> {booking?.Email ?? "Non spécifié"}<br />
+            <strong>Téléphone :</strong> {booking?.Phone ?? "Non spécifié"}<br />
+            <strong>Service :</strong> {booking?.service ?? "Non spécifié"}<br />
+            <strong>Adresse :</strong> {booking?.location?.address ?? "Non spécifiée"}<br />
+            <strong>Ville :</strong> {booking?.location?.city ?? "Non spécifiée"}<br />
+            <strong>Code postal :</strong> {booking?.location?.postalCode ?? "Non spécifié"}<br />
+            <strong>Pays :</strong> {booking?.location?.country ?? "Non spécifié"}<br />
             </li>
           ))}
         </ul>
