@@ -2,7 +2,7 @@ import Lynxa from "../images/Lynxa.svg";
 /* import MapComponent from "../components/mapView"; */
 import AppointmentsMap from "../components/appointmentsList";
 import MapDisplay from "../components/mapDisplay";
-
+import CalendarComponent from "../components/calendar";
 
 const ClientView = () => {
   return (
@@ -18,7 +18,7 @@ const ClientView = () => {
       <h2 className="text-sm font-normal tracking-wider mt-4 text-left mb-[32px]">Visualisez les disponibilités sur une carte interactive, choisissez votre créneau horaire, ou proposez une nouvelle localisation en fonction de vos besoins. </h2>
       <MapDisplay />
     </div>
-    <div className="calendar-container w-full h-[768px] flex-shrink-0 rounded-[45px] bg-white"></div>
+    <div className="calendar-container w-full h-[768px] flex-shrink-0 rounded-[45px] bg-white"><CalendarComponent /></div>
     </div>
     <div className="right-column flex flex-col w-[695px] gap-8">
     <div className="slot-container w-full h-[736px] flex-shrink-0 rounded-[45px] bg-white">
