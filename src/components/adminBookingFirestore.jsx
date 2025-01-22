@@ -77,7 +77,8 @@ const AdminBooking = () => {
       setBookingData({
         userId: user.uid,
         date: '',
-        time: '',
+        startTime: '',
+        endTime: '',  
         LastName: '',
         FirstName: '',
         Email: '',
@@ -115,8 +116,15 @@ const AdminBooking = () => {
           />
           <input
             type="time"
-            name="time"
-            value={bookingData.time}
+            name="startTime"
+            value={bookingData.startTime}
+            onChange={handleInputChange}
+            required
+          />
+          <input
+            type="time"
+            name="endTime"
+            value={bookingData.endTime}
             onChange={handleInputChange}
             required
           />

@@ -1,0 +1,18 @@
+:root {
+
+
+  }
+  .fc .fc-toolbar {
+    border-radius: 10px;
+}
+
+.fc .fc-daygrid-day-number {
+    font-weight: bold;
+    color: #2563eb;
+}
+
+.fc .fc-event {
+    background-color: #3b82f6; /* Couleur des événements */
+    border: none;
+    border-radius: 10px;
+}
